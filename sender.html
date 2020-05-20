@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <!-- <body onload="myfunc"> -->
+    <body>
+        <h1>
+            Sending Peer
+        </h1>
+        <br>
+        <label>Enter Receiver ID</label>
+        <br>
+        <input id="inputbox">
+        <button id="connectbutton">Connect</button>
+        <br>
+        <br>
+        <input id="chatbox">
+        <button id="send">Send</button>
+    </body>
+    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+    <script>
+        // function myfunc(){
+        //     var peer = new Peer();
+        // }
+        var peer = new Peer(debug=3);
+        //window.onload = myfunc;
+        connectbutton = document.getElementById("connectbutton");
+            connectbutton.addEventListener("click", ()=>{
+                inputbox = document.getElementById("inputbox");
+                var conn = peer.connect(inputbox.value);
+                console.log(conn);
+                conn.on('open', function(){
+                    console.log('opened');
+                    // here you have conn.id
+                    chatbox = document.getElementById("chatbox");
+                    chatbutton = document.getElementById("send");
+                    chatbutton.addEventListener("click", ()=>{
+                        conn.send(chatbox.value);
+                        chatbox.value = '';
+                    });
+                }).on('data', (data)=>{
+                    console.log(data);
+                });
+            });
+    </script>
+</html>

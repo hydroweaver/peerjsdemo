@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>
+            Receiving Peer
+        </h1>
+        <label>ID </label>
+        <br>
+        <input id="inputbox">
+        <br>
+        <br>
+        <input id="chatbox">
+        <button id="send">Send</button>
+        <br>
+        <br>
+    </body>
+    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+    <script>
+        var peer = new Peer();
+        inputbox = document.getElementById("inputbox");
+        setTimeout(() => {
+            inputbox.value = peer._id;
+        }, 200);
+        peer.on('connection', function(conn) {
+            console.log(conn);
+            conn.on('data', function(data){
+                // Will print 'hi!'
+                console.log(data);
+          });
+
+          chatbox = document.getElementById("chatbox");
+            chatbutton = document.getElementById("send");
+            chatbutton.addEventListener("click", ()=>{
+                conn.send(chatbox.value);
+                chatbox.value = '';
+            });
+});
+    </script>
+</html>
