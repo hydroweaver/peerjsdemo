@@ -20,7 +20,11 @@
         // function myfunc(){
         //     var peer = new Peer();
         // }
-        var peer = new Peer(debug=3);
+        var peer = new Peer({
+            host: 'localhost',
+            port: 9000,
+            path: '/myapp'
+        },debug=3);
         //window.onload = myfunc;
         connectbutton = document.getElementById("connectbutton");
             connectbutton.addEventListener("click", ()=>{

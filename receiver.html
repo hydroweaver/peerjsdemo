@@ -16,7 +16,11 @@
     </body>
     <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
     <script>
-        var peer = new Peer();
+        var peer = new Peer({
+            host: 'localhost',
+            port: 9000,
+            path: '/myapp'
+        });
         inputbox = document.getElementById("inputbox");
         setTimeout(() => {
             inputbox.value = peer._id;
